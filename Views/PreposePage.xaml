@@ -1,0 +1,167 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NorthenLightsHospital.Views"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="NorthenLightsHospital.Views.PreposePage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PreposePage">
+
+    <Grid MouseDown="Grid_MouseDown">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.9,1" StartPoint="0.1,0">
+                <GradientStop Color="#FFE63070" Offset="1"/>
+                <GradientStop Color="#FFFE8704" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="700">
+                <TabControl HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="800" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
+                    <TabItem Height="58" Width="Auto" Style="{StaticResource MaterialDesignNavigationRailTabItem}" BorderBrush="White" Background="#FFFE8704">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountArrowRight" Width="24" Height="24" Foreground="Black" />
+                                <Label>ADMISSION</Label>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid Margin="0,0,97,0">
+                            <Grid.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFE6B57F" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.861"/>
+                                </LinearGradientBrush>
+                            </Grid.Background>
+
+                            <DatePicker x:Name="datePickChirurgie" HorizontalAlignment="Left" Margin="293,141,0,0" VerticalAlignment="Top" Width="120" Height="28" BorderBrush="#89000000" Background="{x:Null}" Foreground="#DDF5EAEA"/>
+                            <Label Content="Date de la chirurgie:" HorizontalAlignment="Left" Margin="293,101,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <Label Content="NSS:" HorizontalAlignment="Left"  Margin="10,21,0,0" VerticalAlignment="Top" FontSize="15" Foreground="#DD000000"/>
+                            <TextBox x:Name="txtAdmissionNSS" HorizontalAlignment="Left" Margin="52,23,0,403" materialDesign:HintAssist.Hint="Entrer NSS" Foreground="Black" Width="150" BorderBrush="Black" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" LostFocus="txtAdmissionNSS_LostFocus"/>
+                            <Label Content="Numero de lit:" HorizontalAlignment="Left" Margin="110,273,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <ComboBox x:Name="cmbNumLit" HorizontalAlignment="Left" Margin="110,293,0,0" VerticalAlignment="Top" Width="150" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0,5" FontFamily="Arial">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} | {1}">
+                                                    <Binding Path="Numero_lit" />
+                                                    <Binding Path="ID_Type" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Label Content="Medecin:" HorizontalAlignment="Left" Margin="293,273,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <ComboBox x:Name="cmbMedecin" HorizontalAlignment="Left" Margin="293,294,0,0" VerticalAlignment="Top" Width="150" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0,5" FontFamily="Arial">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="nom" />
+                                                    <Binding Path="prenom" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button x:Name="btnAjouterAdmission" Content="Ajouter" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Click="btnAjouterAdmission_Click" Width="80" Margin="10,400,466,10"/>
+                            <Label x:Name="labelNSSTrouve" Content="" HorizontalAlignment="Left" Margin="216,25,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="labelDateChirurgie" Content="" HorizontalAlignment="Left" Margin="275,86,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Type de lit:" HorizontalAlignment="Left" Margin="110,211,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <ComboBox x:Name="cmbTypeLit" HorizontalAlignment="Left" Margin="110,231,0,0" VerticalAlignment="Top" Width="150" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="ID_Type" SelectedIndex="0" SelectionChanged="cmbTypeLit_SelectionChanged"/>
+                            <Label Content="Departement" HorizontalAlignment="Left" Margin="293,211,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <ComboBox x:Name="cmbDepartements" HorizontalAlignment="Left" Margin="293,231,0,0" VerticalAlignment="Top" Width="150" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="nom_departement" SelectedIndex="0" SelectionChanged="cmbDepartements_SelectionChanged"/>
+                            <CheckBox x:Name="chkChirurgieProg" HorizontalAlignment="Left" Margin="95,107,0,0" VerticalAlignment="Top" IsChecked="False" FlowDirection="RightToLeft" Content="Chirurgie Programme" Checked="chkChirurgieProg_Checked" BorderBrush="Black" FontSize="15" Foreground="#DD000000" Background="Black"/>
+                            <CheckBox x:Name="chkTeleviseur" HorizontalAlignment="Left" Margin="174,141,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="Televiseur" Background="Black" BorderBrush="Black" FontSize="15"/>
+                            <CheckBox x:Name="chkTelephone" Content="Telephone" HorizontalAlignment="Left" Margin="170,172,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="Black" BorderBrush="Black" FontSize="15"/>
+                            <Label x:Name="labelNumLit" Content="" HorizontalAlignment="Left" Margin="279,263,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="txtFraisSupp" Content="" HorizontalAlignment="Left" Margin="251,383,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Height="60" VerticalAlignment="Top" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="Auto" Background="#FFFE8704" BorderBrush="White">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Search" Width="24" Height="24" Foreground="Black" />
+                                <Label>RECHERCHE</Label>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFE6B57F" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.861"/>
+                                </LinearGradientBrush>
+                            </Grid.Background>
+                            <TextBox x:Name="txtNSSRecherche" HorizontalAlignment="Left" Margin="52,23,451,403" materialDesign:HintAssist.Hint="Entrer NSS" Foreground="Black" Width="150" BorderBrush="Black" CaretBrush="#FFD94448" SelectionBrush="#FFD94448"/>
+                            <Label Content="NSS:" HorizontalAlignment="Left"  Margin="10,21,0,0" VerticalAlignment="Top" Foreground="#DD000000" FontSize="15"/>
+                            <Button Content="Rechercher Patient" HorizontalAlignment="Left" Margin="226,15,0,0" VerticalAlignment="Top" Width="174" Click="Button_Click_Recherche" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White"/>
+                            <GroupBox Header="Informations sur le patient" HorizontalAlignment="Left" Height="354" Margin="128,71,0,0" VerticalAlignment="Top" Width="304" Style="{DynamicResource MaterialDesignGroupBox}" materialDesign:ColorZoneAssist.Mode="Custom" materialDesign:ColorZoneAssist.Background="#D94448" materialDesign:ColorZoneAssist.Foreground="White">
+                                <Grid Height="354" Margin="0" Width="304" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                    <TextBox x:Name="txtNomPatientRecherche" HorizontalAlignment="Left" Height="23" Margin="20,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+                                    <Label Content="Nom:" HorizontalAlignment="Left" Margin="20,64,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="txtPrenomPatientRecherche" HorizontalAlignment="Left" Height="23" Margin="20,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+                                    <Label Content="Prenom:" HorizontalAlignment="Left" Margin="20,127,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="txtDateNaissanceRecherche" HorizontalAlignment="Left" Height="23" Margin="20,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+                                    <Label Content="Date de naissance:" HorizontalAlignment="Left" Margin="20,184,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="txtNSSRechercheAffichage" HorizontalAlignment="Left" Height="23" Margin="20,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+                                    <Label Content="NSS:" HorizontalAlignment="Left" Margin="20,241,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="txtAssuranceRecherche" HorizontalAlignment="Center" Height="23"  Margin="20,321,134,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" IsEnabled="False"/>
+                                    <Label Content="Assurance:" HorizontalAlignment="Left" Margin="20,297,0,0" VerticalAlignment="Top"/>
+                                </Grid>
+                            </GroupBox>
+
+                        </Grid>
+                    </TabItem>
+                    <TabItem Height="60" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Margin="0,0,1,0" Width="Auto" Background="#FFFE8704" BorderBrush="White">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Plus" Width="24" Height="24" Foreground="Black" />
+                                <Label>AJOUT</Label>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFE6B57F" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.861"/>
+                                </LinearGradientBrush>
+                            </Grid.Background>
+                            <Label Content="NSS:" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Height="26" Width="42" FontSize="15" Foreground="#DD000000"/>
+                            <TextBox x:Name="txtPatientNSS" materialDesign:HintAssist.Hint="Entrer NSS" Foreground="Black" Width="150" BorderBrush="Black" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" Margin="52,23,451,403"/>
+                            <DatePicker x:Name="datePickDateNaissance" HorizontalAlignment="Left" Margin="102,182,0,0" VerticalAlignment="Top" Width="150" Height="24"/>
+                            <Label Content="Date de naissance:" HorizontalAlignment="Left" Margin="102,154,0,0" VerticalAlignment="Top" Foreground="#DD000000" FontSize="15"/>
+                            <Label Content="Nom" HorizontalAlignment="Left" Margin="102,92,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <TextBox x:Name="txtNomPatient" HorizontalAlignment="Left" Height="23" Margin="102,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <TextBox x:Name="txtPrenomPatient" HorizontalAlignment="Left" Height="23" Margin="285,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <Label Content="Prenom" HorizontalAlignment="Left" Margin="285,87,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <TextBox x:Name="txtAdressePatient" HorizontalAlignment="Left" Height="23" Margin="102,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <Label Content="Adresse" HorizontalAlignment="Left" Margin="102,215,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <TextBox x:Name="txtVillePatient" HorizontalAlignment="Left" Height="23" Margin="285,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <Label Content="Ville" HorizontalAlignment="Left" Margin="285,220,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <TextBox x:Name="txtProvincePatient" HorizontalAlignment="Left" Height="23" Margin="102,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <Label Content="Province" HorizontalAlignment="Left" Margin="102,278,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <TextBox x:Name="txtCodePostalPatient" HorizontalAlignment="Left" Height="23" Margin="285,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <Label Content="Code Postal" HorizontalAlignment="Left" Margin="285,283,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <ComboBox x:Name="cmbAssurancePatient" HorizontalAlignment="Left" Margin="285,178,0,0" VerticalAlignment="Top" Width="150" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" DisplayMemberPath="nom_compagnie"/>
+                            <Label Content="Assurance" HorizontalAlignment="Left" Margin="285,154,0,0" VerticalAlignment="Top" FontSize="15"/>
+                            <Button x:Name="btnAjouterPatient" Content="Ajouter" HorizontalAlignment="Left" Margin="10,400,0,0" VerticalAlignment="Top" Width="80" Height="40" Click="btnAjouterPatient_Click" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White"/>
+                            <TextBox x:Name="txtTelephone" HorizontalAlignment="Left" Height="23" Margin="102,369,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                            <Label Content="Telephone" HorizontalAlignment="Left" Margin="102,341,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+            <StackPanel Width="100" Background="White">
+                <Button Margin="10 20" Style="{StaticResource MaterialDesignFloatingActionButton}" Background="{x:Null}"
+                     ToolTip="Close" x:Name="btnExit" Click="btnExit_Click" BorderBrush="#FFAE2354">
+                    <materialDesign:PackIcon Kind="Close" Foreground="Black" Width="30" Height="30" />
+                </Button>
+                <Button x:Name="btnLogout" Content="Logout" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="#D94448" Background="#D94448" Foreground="White" Click="Logout" Panel.ZIndex="1" Margin="10,300"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

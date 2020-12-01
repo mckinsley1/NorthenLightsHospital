@@ -1,0 +1,7 @@
+﻿namespace NorthenLightsHospital
+{
+    class Facture
+    {
+
+    }
+}
