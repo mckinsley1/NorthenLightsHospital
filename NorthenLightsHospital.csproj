@@ -116,7 +116,6 @@
     <Compile Include="Departement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Facture.cs" />
     <Compile Include="Lit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
